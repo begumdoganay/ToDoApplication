@@ -1,0 +1,240 @@
+/* TaskHeader.css */
+.task-header {
+  background-color: var(--card-bg);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* App Title */
+.app-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Search Section */
+.header-center {
+  flex-grow: 1;
+  max-width: 400px;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 15px 10px 35px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  background-color: rgba(0,0,0,0.02);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  background-color: var(--card-bg);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.clear-search {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.clear-search:hover {
+  background-color: rgba(0,0,0,0.05);
+  color: var(--text-color);
+}
+
+/* View and Theme Controls */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.view-selector {
+  display: flex;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 20px;
+  padding: 3px;
+}
+
+.view-btn {
+  border: none;
+  background: none;
+  padding: 5px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: all 0.2s ease;
+}
+
+.view-btn.active {
+  background-color: var(--card-bg);
+  color: var(--primary-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.view-icon {
+  font-size: 16px;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.theme-icon {
+  font-size: 18px;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+  color: var(--text-color);
+}
+
+.header-expanded {
+  display: none;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.mobile-search,
+.mobile-view-selector,
+.mobile-theme-toggle {
+  margin-bottom: 15px;
+}
+
+.view-option,
+.theme-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-option .view-icon,
+.theme-option .theme-icon {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.view-option:hover,
+.theme-option:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.view-option.active {
+  background-color: rgba(74, 111, 165, 0.1);
+  color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header-main {
+    flex-wrap: wrap;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .header-center {
+    display: none;
+  }
+  
+  .header-right {
+    display: none;
+  }
+  
+  .task-header.expanded .header-expanded {
+    display: block;
+  }
+}
+
+/* Dark theme adjustments handled via CSS variables */
+[data-theme="dark"] .search-input {
+  background-color: rgba(255,255,255,0.05);
+}
+
+[data-theme="dark"] .view-selector {
+  background-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .view-btn.active {
+  background-color: rgba(0,0,0,0.2);
+}

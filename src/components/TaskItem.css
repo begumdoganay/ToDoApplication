@@ -1,0 +1,670 @@
+/* Task Item Styles */
+.task-item {
+  position: relative;
+  font-size: 16px;
+  background-color: var(--card-bg);
+  margin: 5px 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.task-item:hover {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.task-item.expanded {
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* Priority indicators */
+.task-item.priority-high {
+  border-left: 3px solid var(--priority-high);
+}
+
+.task-item.priority-medium {
+  border-left: 3px solid var(--priority-medium);
+}
+
+.task-item.priority-low {
+  border-left: 3px solid var(--priority-low);
+}
+
+/* View Mode Styles */
+.view {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+/* Checkbox Styles */
+.checkbox-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  margin: 0;
+  opacity: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: all 0.2s;
+}
+
+.toggle:checked + .custom-checkbox {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.toggle:checked + .custom-checkbox:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Task Content Styles */
+.task-content {
+  flex-grow: 1;
+  min-width: 0; /* To ensure text truncation works */
+  padding-right: 10px;
+}
+
+.task-text {
+  word-break: break-word;
+  line-height: 1.4;
+  transition: color 0.2s;
+  font-size: 15px;
+}
+
+.completed .task-text {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--text-light);
+  gap: 8px;
+}
+
+/* Action Buttons */
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: rgba(0,0,0,0.05);
+  color: var(--text-color);
+}
+
+.action-btn .icon {
+  font-size: 16px;
+}
+
+/* Priority and Due Date Styles */
+.priority-badge,
+.category-badge,
+.due-date {
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.priority-badge {
+  text-transform: capitalize;
+}
+
+.priority-badge.high {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--priority-high);
+}
+
+.priority-badge.low {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: var(--priority-low);
+}
+
+.category-badge {
+  background-color: rgba(71, 184, 224, 0.1);
+  color: var(--secondary-color);
+}
+
+.due-date {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.due-date.overdue {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--priority-high);
+  font-weight: 500;
+}
+
+.due-date.due-today {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--priority-high);
+  font-weight: 500;
+}
+
+.due-date.due-soon {
+  background-color: rgba(243, 156, 18, 0.1);
+  color: var(--priority-medium);
+  font-weight: 500;
+}
+
+/* Context Menu */
+.context-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  min-width: 160px;
+  background-color: var(--card-bg);
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.menu-item.delete {
+  color: var(--priority-high);
+}
+
+.menu-icon {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+/* Task Details Section */
+.task-details {
+  padding: 15px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  background-color: rgba(0,0,0,0.01);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+.task-notes {
+  margin-bottom: 15px;
+}
+
+.task-notes h4 {
+  margin: 0 0 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.task-notes p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-color);
+  white-space: pre-line; /* Preserve line breaks */
+}
+
+.task-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.metadata-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.metadata-icon {
+  font-size: 12px;
+}
+
+.metadata-label {
+  font-weight: 500;
+}
+
+.detail-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.detail-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.05);
+  color: var(--text-color);
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.detail-btn:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.detail-btn.delete {
+  color: var(--priority-high);
+}
+
+.detail-btn.delete:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Edit Form Styles */
+.edit-form {
+  padding: 15px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  animation: fadeIn 0.3s ease;
+}
+
+.edit-field {
+  margin-bottom: 15px;
+}
+
+.edit-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.edit-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.edit-text,
+.edit-priority,
+.edit-date,
+.edit-category,
+.edit-notes {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--text-color);
+  background-color: var(--card-bg);
+  transition: all 0.2s;
+}
+
+.edit-text:focus,
+.edit-priority:focus,
+.edit-date:focus,
+.edit-category:focus,
+.edit-notes:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.1);
+}
+
+.edit-priority {
+  border-left-width: 3px;
+}
+
+.edit-priority.priority-high {
+  border-left-color: var(--priority-high);
+}
+
+.edit-priority.priority-medium {
+  border-left-color: var(--priority-medium);
+}
+
+.edit-priority.priority-low {
+  border-left-color: var(--priority-low);
+}
+
+.edit-notes {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.save-button,
+.cancel-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.save-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: var(--text-light);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.cancel-button:hover {
+  background-color: rgba(0,0,0,0.05);
+  color: var(--text-color);
+}
+
+/* Board View Styles */
+.task-item.board-item {
+  margin: 0 0 10px;
+  cursor: grab;
+}
+
+.task-item.board-item:active {
+  cursor: grabbing;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .edit-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .task-actions {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .task-content {
+    padding-right: 60px;
+  }
+  
+  .context-menu {
+    position: fixed;
+    top: auto;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    max-width: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  .menu-item {
+    padding: 15px;
+  }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .custom-checkbox {
+  border-color: #555;
+}
+
+[data-theme="dark"] .task-details {
+  background-color: rgba(255,255,255,0.02);
+}
+
+[data-theme="dark"] .action-btn:hover,
+[data-theme="dark"] .menu-item:hover,
+[data-theme="dark"] .detail-btn:hover,
+[data-theme="dark"] .cancel-button:hover {
+  background-color: rgba(255,255,255,0.05);
+}
+
+[data-theme="dark"] .edit-text,
+[data-theme="dark"] .edit-priority,
+[data-theme="dark"] .edit-date,
+[data-theme="dark"] .edit-category,
+[data-theme="dark"] .edit-notes {
+  background-color: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+}
+
+
+/* Priority and Due Date Styles */
+.priority-badge {
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.priority-badge.high {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--priority-high);
+}
+
+.priority-badge.low {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: var(--priority-low);
+}
+
+.due-date {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.due-date.overdue {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--priority-high);
+  font-weight: 500;
+}
+
+.due-date.due-today {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--priority-high);
+  font-weight: 500;
+}
+
+.due-date.due-soon {
+  background-color: rgba(243, 156, 18, 0.1);
+  color: var(--priority-medium);
+  font-weight: 500;
+}
+
+/* Priority Task Item Styling */
+.task-list li.priority-high .view {
+  border-left: 3px solid var(--priority-high);
+}
+
+.task-list li.priority-medium .view {
+  border-left: 3px solid var(--priority-medium);
+}
+
+.task-list li.priority-low .view {
+  border-left: 3px solid var(--priority-low);
+}
+
+/* Delete Button */
+.destroy {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  color: #cc9a9a;
+  transform: translateY(-50%);
+  transition: color 0.2s ease-out;
+}
+
+.destroy:after {
+  content: '×';
+  display: block;
+  line-height: 30px;
+}
+
+.destroy:hover {
+  color: var(--primary-dark);
+}
+
+.task-list li:hover .destroy {
+  display: block;
+}
+
+/* Edit Form Styles */
+.edit-form {
+  padding: 15px 20px;
+}
+
+.edit-text {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.edit-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.edit-priority,
+.edit-date {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  flex-grow: 1;
+}
+
+.save-button,
+.cancel-button {
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.save-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.save-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.cancel-button {
+  background-color: #f1f1f1;
+}
+
+.cancel-button:hover {
+  background-color: #e4e4e4;
+}
